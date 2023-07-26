@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="galerimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kullanici_adi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="sifre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ku_tipi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_arac">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="plaka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="marka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="arac_tipi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="renk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="yil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="resim" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="durum" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="arac_durum" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_musteri" Relationship="Self.FK_tbl_musteri_tbl_arac" FromRole="tbl_arac" ToRole="tbl_musteri" />
+  </EntityType>
+  <EntityType Name="tbl_kiralama">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="musteri_id" Type="Int32" />
+    <Property Name="tc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="plaka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="alis_tarihi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="veris_tarihi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ucret" Type="Int32" />
+    <NavigationProperty Name="tbl_musteri" Relationship="Self.FK_tbl_kiralama_tbl_musteri" FromRole="tbl_kiralama" ToRole="tbl_musteri" />
+  </EntityType>
+  <EntityType Name="tbl_musteri">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="arac_id" Type="Int32" />
+    <Property Name="tc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="adi_soyadi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="cinsiyet" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="telefon" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="dogum_tarihi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ehliyet_no" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="sifre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_arac" Relationship="Self.FK_tbl_musteri_tbl_arac" FromRole="tbl_musteri" ToRole="tbl_arac" />
+    <NavigationProperty Name="tbl_kiralama" Relationship="Self.FK_tbl_kiralama_tbl_musteri" FromRole="tbl_musteri" ToRole="tbl_kiralama" />
+  </EntityType>
+  <Association Name="FK_tbl_musteri_tbl_arac">
+    <End Role="tbl_arac" Type="Self.tbl_arac" Multiplicity="0..1" />
+    <End Role="tbl_musteri" Type="Self.tbl_musteri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_arac">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_musteri">
+        <PropertyRef Name="arac_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_kiralama_tbl_musteri">
+    <End Role="tbl_musteri" Type="Self.tbl_musteri" Multiplicity="0..1" />
+    <End Role="tbl_kiralama" Type="Self.tbl_kiralama" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_musteri">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_kiralama">
+        <PropertyRef Name="musteri_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="galerimEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_admin" EntityType="Self.tbl_admin" />
+    <EntitySet Name="tbl_arac" EntityType="Self.tbl_arac" />
+    <EntitySet Name="tbl_kiralama" EntityType="Self.tbl_kiralama" />
+    <EntitySet Name="tbl_musteri" EntityType="Self.tbl_musteri" />
+    <AssociationSet Name="FK_tbl_musteri_tbl_arac" Association="Self.FK_tbl_musteri_tbl_arac">
+      <End Role="tbl_arac" EntitySet="tbl_arac" />
+      <End Role="tbl_musteri" EntitySet="tbl_musteri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_kiralama_tbl_musteri" Association="Self.FK_tbl_kiralama_tbl_musteri">
+      <End Role="tbl_musteri" EntitySet="tbl_musteri" />
+      <End Role="tbl_kiralama" EntitySet="tbl_kiralama" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

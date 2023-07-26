@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="galerimModelStoreContainer" CdmEntityContainer="galerimEntities">
+    <EntitySetMapping Name="tbl_admin">
+      <EntityTypeMapping TypeName="galerimModel.tbl_admin">
+        <MappingFragment StoreEntitySet="tbl_admin">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="ku_tipi" ColumnName="ku_tipi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_arac">
+      <EntityTypeMapping TypeName="galerimModel.tbl_arac">
+        <MappingFragment StoreEntitySet="tbl_arac">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="plaka" ColumnName="plaka" />
+          <ScalarProperty Name="marka" ColumnName="marka" />
+          <ScalarProperty Name="model" ColumnName="model" />
+          <ScalarProperty Name="arac_tipi" ColumnName="arac_tipi" />
+          <ScalarProperty Name="renk" ColumnName="renk" />
+          <ScalarProperty Name="yil" ColumnName="yil" />
+          <ScalarProperty Name="resim" ColumnName="resim" />
+          <ScalarProperty Name="durum" ColumnName="durum" />
+          <ScalarProperty Name="arac_durum" ColumnName="arac_durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_kiralama">
+      <EntityTypeMapping TypeName="galerimModel.tbl_kiralama">
+        <MappingFragment StoreEntitySet="tbl_kiralama">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
+          <ScalarProperty Name="tc" ColumnName="tc" />
+          <ScalarProperty Name="plaka" ColumnName="plaka" />
+          <ScalarProperty Name="alis_tarihi" ColumnName="alis_tarihi" />
+          <ScalarProperty Name="veris_tarihi" ColumnName="veris_tarihi" />
+          <ScalarProperty Name="ucret" ColumnName="ucret" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_musteri">
+      <EntityTypeMapping TypeName="galerimModel.tbl_musteri">
+        <MappingFragment StoreEntitySet="tbl_musteri">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="arac_id" ColumnName="arac_id" />
+          <ScalarProperty Name="tc" ColumnName="tc" />
+          <ScalarProperty Name="adi_soyadi" ColumnName="adi_soyadi" />
+          <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="dogum_tarihi" ColumnName="dogum_tarihi" />
+          <ScalarProperty Name="ehliyet_no" ColumnName="ehliyet_no" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

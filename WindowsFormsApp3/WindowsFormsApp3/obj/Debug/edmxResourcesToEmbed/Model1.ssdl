@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="galerimModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kullanici_adi" Type="nvarchar" MaxLength="150" />
+    <Property Name="sifre" Type="nvarchar" MaxLength="150" />
+    <Property Name="ku_tipi" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbl_arac">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="plaka" Type="nvarchar" MaxLength="50" />
+    <Property Name="marka" Type="nvarchar" MaxLength="50" />
+    <Property Name="model" Type="nvarchar" MaxLength="50" />
+    <Property Name="arac_tipi" Type="nvarchar" MaxLength="50" />
+    <Property Name="renk" Type="nvarchar" MaxLength="50" />
+    <Property Name="yil" Type="nvarchar" MaxLength="50" />
+    <Property Name="resim" Type="nvarchar" MaxLength="200" />
+    <Property Name="durum" Type="nvarchar" MaxLength="200" />
+    <Property Name="arac_durum" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbl_kiralama">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="musteri_id" Type="int" />
+    <Property Name="tc" Type="nvarchar" MaxLength="50" />
+    <Property Name="plaka" Type="nvarchar" MaxLength="50" />
+    <Property Name="alis_tarihi" Type="nvarchar" MaxLength="50" />
+    <Property Name="veris_tarihi" Type="nvarchar" MaxLength="50" />
+    <Property Name="ucret" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_musteri">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="arac_id" Type="int" />
+    <Property Name="tc" Type="nvarchar" MaxLength="50" />
+    <Property Name="adi_soyadi" Type="nvarchar" MaxLength="150" />
+    <Property Name="cinsiyet" Type="nvarchar" MaxLength="150" />
+    <Property Name="telefon" Type="nvarchar" MaxLength="150" />
+    <Property Name="dogum_tarihi" Type="nvarchar" MaxLength="150" />
+    <Property Name="ehliyet_no" Type="nvarchar" MaxLength="150" />
+    <Property Name="sifre" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <Association Name="FK_tbl_kiralama_tbl_musteri">
+    <End Role="tbl_musteri" Type="Self.tbl_musteri" Multiplicity="0..1" />
+    <End Role="tbl_kiralama" Type="Self.tbl_kiralama" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_musteri">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_kiralama">
+        <PropertyRef Name="musteri_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_musteri_tbl_arac">
+    <End Role="tbl_arac" Type="Self.tbl_arac" Multiplicity="0..1" />
+    <End Role="tbl_musteri" Type="Self.tbl_musteri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_arac">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_musteri">
+        <PropertyRef Name="arac_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="galerimModelStoreContainer">
+    <EntitySet Name="tbl_admin" EntityType="Self.tbl_admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_arac" EntityType="Self.tbl_arac" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_kiralama" EntityType="Self.tbl_kiralama" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_musteri" EntityType="Self.tbl_musteri" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_kiralama_tbl_musteri" Association="Self.FK_tbl_kiralama_tbl_musteri">
+      <End Role="tbl_musteri" EntitySet="tbl_musteri" />
+      <End Role="tbl_kiralama" EntitySet="tbl_kiralama" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_musteri_tbl_arac" Association="Self.FK_tbl_musteri_tbl_arac">
+      <End Role="tbl_arac" EntitySet="tbl_arac" />
+      <End Role="tbl_musteri" EntitySet="tbl_musteri" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
